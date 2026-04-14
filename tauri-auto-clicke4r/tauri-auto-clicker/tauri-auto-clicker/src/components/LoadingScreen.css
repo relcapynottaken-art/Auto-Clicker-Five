@@ -1,0 +1,120 @@
+/* ── Loading Screen ── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  z-index: 9999;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Phase classes */
+.loading-enter {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.loading-hold {
+  opacity: 1;
+  transform: scale(1);
+}
+.loading-exit {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+/* Radial ambient glow */
+.loading-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+  filter: blur(48px);
+  pointer-events: none;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+/* Lightning bolt icon */
+.loading-bolt {
+  width: 56px;
+  height: 88px;
+  margin-bottom: 20px;
+  animation: boltDrop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+  filter: drop-shadow(0 0 16px var(--color-primary-glow));
+}
+
+@keyframes boltDrop {
+  from { opacity: 0; transform: translateY(-20px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+/* Brand wordmark */
+.loading-wordmark {
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  animation: wordmarkRise 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+@keyframes wordmarkRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.loading-swift {
+  color: var(--color-text-main);
+}
+
+.loading-strike {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tagline */
+.loading-tagline {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: wordmarkRise 0.5s ease 0.4s both;
+}
+
+/* Thin progress bar */
+.loading-bar-track {
+  margin-top: 40px;
+  width: 180px;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  animation: wordmarkRise 0.3s ease 0.5s both;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  animation: barFill 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes barFill {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
